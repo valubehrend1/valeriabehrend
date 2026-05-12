@@ -532,7 +532,7 @@ export const AboutSection = () => {
                   <ImagePlaceholder>
                     <ProfilePhoto
                       src={valeriaImage}
-                      alt="Valeria Behrend — Senior Web Developer & Art Director"
+                      alt="Valeria Behrend — Senior Software Developer & Art Director"
                     />
                     <PhotoTint />
                     <PhotoGrid />
