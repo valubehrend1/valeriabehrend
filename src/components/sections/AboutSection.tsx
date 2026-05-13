@@ -621,6 +621,14 @@ export const AboutSection = () => {
                     collaboration across multidisciplinary teams.
                   </Paragraph>
 
+                  <Paragraph>
+                    I also integrate AI into delivery workflows to optimize
+                    research, prototyping, and production tasks. I work with
+                    prompt engineering practices and context design to improve
+                    output quality, reduce iteration time, and keep a healthy
+                    latency-cost balance across LLM-driven features.
+                  </Paragraph>
+
                   <Paragraph sx={{ color: CREAM }}>
                     Today, I build digital products that are technically solid,
                     visually intentional, and strategically aligned with
@@ -632,6 +640,7 @@ export const AboutSection = () => {
                     <SkillTag>Engineering</SkillTag>
                     <SkillTag>Art Direction</SkillTag>
                     <SkillTag>Marketing</SkillTag>
+                    <SkillTag>AI</SkillTag>
                   </SkillTags>
                 </TextContent>
               </TextPanel>
