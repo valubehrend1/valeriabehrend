@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import heroImage from '../../assets/hero.png';
 import heroMobileImage from '../../assets/hero-mobile.png';
 
@@ -29,6 +30,8 @@ const Portrait = styled('img')({
 });
 
 export const HeroSection = () => {
+  const { t } = useTranslation();
+
   return (
     <HeroContainer as="section" className="hero-section">
       <HeroInner>
@@ -39,7 +42,7 @@ export const HeroSection = () => {
         >
           <HeroPicture>
             <source media="(max-width: 900px)" srcSet={heroMobileImage} />
-            <Portrait src={heroImage} alt="Hero" />
+            <Portrait src={heroImage} alt={t('hero.imageAlt')} />
           </HeroPicture>
         </motion.div>
       </HeroInner>

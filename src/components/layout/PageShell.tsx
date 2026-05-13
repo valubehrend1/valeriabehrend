@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Box, Container, IconButton, Drawer } from '@mui/material';
 import { Close, KeyboardArrowUp, Menu } from '@mui/icons-material';
 import { ReactNode, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BLACK, PINK, YELLOW, SKY_BLUE, PURPLE } from '../../styles/theme';
 
 const PageContainer = styled(Box)({
@@ -236,13 +237,38 @@ const BackToTopBtn = styled(IconButton, {
   }
 }));
 
+const LanguageToggle = styled('button')({
+  fontFamily: '"Space Mono", monospace',
+  fontSize: '0.72rem',
+  fontWeight: 700,
+  letterSpacing: '0.12em',
+  textTransform: 'uppercase',
+  color: 'rgba(255,255,255,0.76)',
+  border: `1px solid rgba(255,255,255,0.28)`,
+  backgroundColor: 'transparent',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  cursor: 'pointer',
+  transition: 'color 0.2s ease, border-color 0.2s ease',
+
+  '&:hover': {
+    color: '#fff',
+    borderColor: '#fff'
+  }
+});
+
 interface PageShellProps {
   children: ReactNode;
 }
 
 export const PageShell = ({ children }: PageShellProps) => {
+  const { t, i18n } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language.startsWith('es') ? 'en' : 'es');
+  };
 
   useEffect(() => {
     const onScroll = () => setShowBackToTop(window.scrollY > 260);
@@ -260,10 +286,10 @@ export const PageShell = ({ children }: PageShellProps) => {
   };
 
   const navItems = [
-    { id: 'about', label: 'About', index: '01' },
-    { id: 'services', label: 'Services', index: '02' },
-    { id: 'projects', label: 'Projects', index: '03' },
-    { id: 'contact', label: 'Contact', index: '04' }
+    { id: 'about', label: t('nav.about'), index: '01' },
+    { id: 'services', label: t('nav.services'), index: '02' },
+    { id: 'projects', label: t('nav.projects'), index: '03' },
+    { id: 'contact', label: t('nav.contact'), index: '04' }
   ];
 
   return (
@@ -284,16 +310,19 @@ export const PageShell = ({ children }: PageShellProps) => {
                 {item.label}
               </NavLink>
             ))}
+            <LanguageToggle type="button" onClick={toggleLanguage}>
+              {i18n.language.startsWith('es') ? t('common.language.en') : t('common.language.es')}
+            </LanguageToggle>
             <NavContactLink
               href="#contact"
               onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}
             >
-              Contact
+              {t('nav.contact')}
             </NavContactLink>
           </NavLinks>
           <HamburgerBtn
             onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open navigation menu"
+            aria-label={t('nav.openMenu')}
           >
             <Menu />
           </HamburgerBtn>
@@ -319,7 +348,7 @@ export const PageShell = ({ children }: PageShellProps) => {
             </MobileLogo>
             <IconButton
               onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close navigation menu"
+              aria-label={t('nav.closeMenu')}
               sx={{ color: '#FAFAFA', borderRadius: '8px' }}
             >
               <Close />
@@ -346,8 +375,13 @@ export const PageShell = ({ children }: PageShellProps) => {
           </MobileNavLinks>
 
           <MobileMenuFooter>
-            <MobileContactInfo>behrendvaleria@gmail.com</MobileContactInfo>
-            <MobileContactInfo sx={{ mt: '4px' }}>Buenos Aires — Germany</MobileContactInfo>
+            <MobileContactInfo>{t('nav.mobileEmail')}</MobileContactInfo>
+            <MobileContactInfo sx={{ mt: '4px' }}>{t('nav.mobileLocation')}</MobileContactInfo>
+            <Box sx={{ mt: 1.2 }}>
+              <LanguageToggle type="button" onClick={toggleLanguage}>
+                {i18n.language.startsWith('es') ? t('common.language.en') : t('common.language.es')}
+              </LanguageToggle>
+            </Box>
           </MobileMenuFooter>
 
           <MobileDecorRect />
@@ -357,7 +391,7 @@ export const PageShell = ({ children }: PageShellProps) => {
 
       <BackToTopBtn
         $visible={showBackToTop}
-        aria-label="Back to top"
+        aria-label={t('nav.backToTop')}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         <KeyboardArrowUp fontSize="small" />

@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { Send } from '@mui/icons-material';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import { useContactForm } from '../../hooks/useContactForm';
 import {
   BLACK,
@@ -510,37 +511,29 @@ const ErrorMessage = styled(Box)(({ theme }) => ({
   lineHeight: 1.55
 }));
 
-const projectTypes = [
-  'Web Development',
-  'Mobile Development',
-  'AI Integration',
-  'Design System',
-  'Product Evolution',
-  'Consulting',
-  'Other'
-];
-
 export const ContactSection = () => {
+  const { t } = useTranslation();
+  const projectTypes = t('contact.form.projectTypes', {
+    returnObjects: true
+  }) as string[];
+
   const { formData, isSubmitted, isSubmitting, errorMessage, handleChange, handleSubmit } =
     useContactForm();
 
   return (
     <ContactContainer component="section" id="contact">
-      <BackgroundWord>Hello</BackgroundWord>
+      <BackgroundWord>{t('contact.backgroundWord')}</BackgroundWord>
       <BlueprintLines />
       <DotField />
 
       <ContactContent maxWidth="xl">
         <EditorialHeader>
           <Box>
-            <HeaderLabel>§ 04 — Contact</HeaderLabel>
-            <HeaderTitle>Work Together</HeaderTitle>
+            <HeaderLabel>{t('contact.headerLabel')}</HeaderLabel>
+            <HeaderTitle>{t('contact.headerTitle')}</HeaderTitle>
           </Box>
 
-          <HeaderNote>
-            Have a product, platform or visual system that needs technical and
-            creative direction?
-          </HeaderNote>
+          <HeaderNote>{t('contact.headerNote')}</HeaderNote>
         </EditorialHeader>
 
         <TwoColumnLayout>
@@ -554,18 +547,15 @@ export const ContactSection = () => {
             <StatementPanel>
               <StatementInner>
                 <BigStatement>
-                  Let&apos;s
-                  <StatementAccent>Make</StatementAccent>
-                  Something.
+                  {t('contact.statement.line1')}
+                  <StatementAccent>{t('contact.statement.accent')}</StatementAccent>
+                  {t('contact.statement.line3')}
                 </BigStatement>
 
-                <SupportingText>
-                  Have a project in mind, a product that needs improvement, or
-                  an idea that needs technical and visual direction?
-                </SupportingText>
+                <SupportingText>{t('contact.statement.supporting')}</SupportingText>
 
                 <ContactBlock>
-                  <ContactBlockLabel>Email</ContactBlockLabel>
+                  <ContactBlockLabel>{t('contact.labels.email')}</ContactBlockLabel>
                   <ContactBlockValue>
                     behrendvaleria@gmail.com
                   </ContactBlockValue>
@@ -579,7 +569,7 @@ export const ContactSection = () => {
                     rel="noopener noreferrer"
                   >
                     <span>↗</span>
-                    <span>LinkedIn Profile</span>
+                    <span>{t('contact.labels.linkedInProfile')}</span>
                   </LinkedInBlock>
                 </Box>
               </StatementInner>
@@ -599,7 +589,7 @@ export const ContactSection = () => {
           >
             <FormContainer>
               <FormInner>
-                <FormTitle>Send a Message</FormTitle>
+                <FormTitle>{t('contact.form.title')}</FormTitle>
 
                 <form onSubmit={handleSubmit}>
                   <Grid container spacing={2.5}>
@@ -607,7 +597,7 @@ export const ContactSection = () => {
                       <StyledTextField
                         fullWidth
                         required
-                        label="Name"
+                        label={t('contact.form.name')}
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -618,7 +608,7 @@ export const ContactSection = () => {
                       <StyledTextField
                         fullWidth
                         required
-                        label="Email"
+                        label={t('contact.form.email')}
                         name="email"
                         type="email"
                         value={formData.email}
@@ -631,7 +621,7 @@ export const ContactSection = () => {
                         fullWidth
                         required
                         select
-                        label="Project Type"
+                        label={t('contact.form.projectType')}
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
@@ -650,7 +640,7 @@ export const ContactSection = () => {
                         required
                         multiline
                         rows={5}
-                        label="Message"
+                        label={t('contact.form.message')}
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
@@ -665,12 +655,16 @@ export const ContactSection = () => {
                     endIcon={<Send />}
                     disabled={isSubmitted || isSubmitting}
                   >
-                    {isSubmitted ? '✓ Message Sent' : isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitted
+                      ? t('contact.form.sent')
+                      : isSubmitting
+                        ? t('contact.form.sending')
+                        : t('contact.form.send')}
                   </SubmitButton>
 
                   {isSubmitted && (
                     <SuccessMessage>
-                      Thank you. I&apos;ll get back to you soon.
+                      {t('contact.form.success')}
                     </SuccessMessage>
                   )}
 

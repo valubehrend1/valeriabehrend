@@ -45,7 +45,7 @@ The tone should be confident, elegant, direct, and professional.
 Title:
 “Services”
 Create a visually strong services section with cards or structured blocks. Include these services:
-Web & Mobile Development React, TypeScript, Node.js, Capacitor, Docker.
+Web & Mobile Development React, TypeScript, Python, Capacitor, Docker.
 AI Chatbots & Integrations Custom chatbot flows, automation, and AI-powered integrations.
 UI/UX with Design & Marketing Criteria Interfaces shaped by usability, visual direction, brand positioning, and audience behavior.
 Maintenance & Product Evolution Improvements, refactors, new features, performance work, and long-term project support.
@@ -58,7 +58,7 @@ Create 6 project cards using realistic placeholder content. Each card should inc
 Use these dummy project examples that fit Valeria’s profile:
 1. “E-commerce Front-End Platform” Role: Senior Front-End Developer Tech: React, TypeScript, MUI, REST APIs
 2. “Mobile Hybrid App” Role: Web & Mobile Developer Tech: React, Capacitor, TypeScript
-3. “AI Customer Support Chatbot” Role: Developer & Integration Consultant Tech: Node.js, AI APIs, Automation
+3. “AI Customer Support Chatbot” Role: Developer & Integration Consultant Tech: Python, AI APIs, Automation
 4. “Design System & UI Modernization” Role: Design Lead & Front-End Developer Tech: React, MUI, Storybook
 5. “Marketing Landing Page System” Role: Developer with Art Direction Tech: React, TypeScript, Analytics
 6. “Legacy Product Evolution” Role: Front-End Developer Tech: React, Refactoring, Performance

@@ -1,10 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { BLACK, SKY_BLUE, LIME } from '../../styles/theme';
-
-const skills = [
-  'React', 'TypeScript', 'Capacitor', 'Docker', 'REST APIs', 'AI Integration', 'Brand Strategy', 'Automation'
-];
 
 const StripOuter = styled(Box)({
   backgroundColor: SKY_BLUE,
@@ -49,6 +46,9 @@ const Separator = styled(Box)({
 });
 
 export const SkillsStrip = () => {
+  const { t } = useTranslation();
+  const skills = t('skillsStrip.items', { returnObjects: true }) as string[];
+
   return (
     <StripOuter>
       <Box className="track">

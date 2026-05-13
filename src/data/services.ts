@@ -4,8 +4,8 @@ export const services: ServiceItem[] = [
   {
     id: 1,
     title: 'Web & Mobile Development',
-    description: 'Full-stack web applications and hybrid mobile apps built with React, TypeScript, Node.js, and Capacitor. Production-ready, performant, and scalable from day one.',
-    technologies: ['React', 'TypeScript', 'Node.js', 'Capacitor', 'Docker']
+    description: 'Full-stack web applications and hybrid mobile apps built with React, TypeScript, Python, and Capacitor. Production-ready, performant, and scalable from day one.',
+    technologies: ['React', 'TypeScript', 'Python', 'Capacitor', 'Docker']
   },
   {
     id: 2,

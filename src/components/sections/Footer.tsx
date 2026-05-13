@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, IconButton } from '@mui/material';
 import { LinkedIn } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 import {
   BLACK,
   CREAM,
@@ -356,6 +357,8 @@ const AccentLine = styled(Box)(({ theme }) => ({
 }));
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <FooterContainer as="footer">
       <TopStripe />
@@ -364,7 +367,7 @@ export const Footer = () => {
 
       <FooterMain maxWidth="xl">
         <NameBlock>
-          <FooterLabel>Portfolio — 2026</FooterLabel>
+          <FooterLabel>{t('footer.portfolioLabel')}</FooterLabel>
           <GiantName>Valeria</GiantName>
           <GiantNameOutline>Behrend</GiantNameOutline>
         </NameBlock>
@@ -373,18 +376,18 @@ export const Footer = () => {
           <FooterMeta>
             <MetaBlock>
               <MetaInner>
-                <MetaLabel>Practice</MetaLabel>
+                <MetaLabel>{t('footer.practiceLabel')}</MetaLabel>
                 <MetaText>
-                  Software Engineering × Art Direction × Strategy
+                  {t('footer.practiceText')}
                 </MetaText>
               </MetaInner>
             </MetaBlock>
 
             <MetaBlock>
               <MetaInner>
-                <MetaLabel>Location</MetaLabel>
+                <MetaLabel>{t('footer.locationLabel')}</MetaLabel>
                 <MetaText>
-                  Buenos Aires — Germany — Worldwide
+                  {t('footer.locationText')}
                 </MetaText>
               </MetaInner>
             </MetaBlock>
@@ -401,7 +404,7 @@ export const Footer = () => {
               href="https://www.linkedin.com/in/valeria-behrend-5673101b2/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
+              aria-label={t('footer.linkedinAria')}
             >
               <StyledIconButton>
                 <LinkedIn />
@@ -412,11 +415,11 @@ export const Footer = () => {
 
         <BottomRow>
           <Copyright>
-            © {new Date().getFullYear()} Valeria Behrend. All rights reserved.
+            © {new Date().getFullYear()} Valeria Behrend. {t('footer.rightsReserved')}
           </Copyright>
 
           <MadeWith>
-            Senior Web Developer & Art Director
+            {t('footer.madeWith')}
           </MadeWith>
         </BottomRow>
       </FooterMain>

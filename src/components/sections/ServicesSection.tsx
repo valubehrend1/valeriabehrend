@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import { motion } from 'motion/react';
-import { services } from '../../data/services';
+import { useTranslation } from 'react-i18next';
 import { ServiceItem } from '../../types';
 import {
   BLACK,
@@ -441,6 +441,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
+  const { t } = useTranslation();
   const scheme = serviceSchemes[index % serviceSchemes.length];
 
   return (
@@ -475,7 +476,7 @@ const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
 
           <CardInner>
             <ServiceLabel>
-              Service {String(index + 1).padStart(2, '0')}
+              {t('services.serviceLabelPrefix')} {String(index + 1).padStart(2, '0')}
             </ServiceLabel>
 
             <ServiceTitle>{service.title}</ServiceTitle>
@@ -495,23 +496,23 @@ const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
 };
 
 export const ServicesSection = () => {
+  const { t } = useTranslation();
+  const services = t('services.items', { returnObjects: true }) as ServiceItem[];
+
   return (
     <ServicesContainer as="section" id="services">
-      <BackgroundWord>Services</BackgroundWord>
+      <BackgroundWord>{t('services.backgroundWord')}</BackgroundWord>
       <BlueprintLines />
       <DotField />
 
       <ServicesContent maxWidth="xl">
         <EditorialHeader>
           <Box>
-            <HeaderLabel>§ 02 — What I Do</HeaderLabel>
-            <HeaderTitle>Services</HeaderTitle>
+            <HeaderLabel>{t('services.headerLabel')}</HeaderLabel>
+            <HeaderTitle>{t('services.headerTitle')}</HeaderTitle>
           </Box>
 
-          <HeaderNote>
-            Strategic design, scalable interfaces and technical direction for
-            digital products with a strong visual point of view.
-          </HeaderNote>
+          <HeaderNote>{t('services.headerNote')}</HeaderNote>
         </EditorialHeader>
 
         <ServicesGrid container spacing={{ xs: 3, md: 4 }}>

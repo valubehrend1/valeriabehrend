@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import { projects } from '../../data/projects';
 import { ProjectItem } from '../../types';
 import {
@@ -27,7 +28,12 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'AI Research Assistant': { bg: CREAM, text: BLACK },
   'Carbon Saving Challenge App': { bg: PINK, text: BLACK },
   'Enterprise Webcast Platform': { bg: BLACK, text: WHITE },
-  'Curation & Research Platform': { bg: SKY_BLUE, text: WHITE }
+  'Curation & Research Platform': { bg: SKY_BLUE, text: WHITE },
+  'Plataforma de Chatbots con IA': { bg: SKY_BLUE, text: WHITE },
+  'Asistente de Investigacion con IA': { bg: CREAM, text: BLACK },
+  'App de Desafios para Ahorro de Carbono': { bg: PINK, text: BLACK },
+  'Plataforma Enterprise de Webcast': { bg: BLACK, text: WHITE },
+  'Plataforma de Curaduria e Investigacion': { bg: SKY_BLUE, text: WHITE }
 };
 
 const ProjectsContainer = styled(Box)(({ theme }) => ({
@@ -420,6 +426,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCardComponent = ({ project, index }: ProjectCardProps) => {
+  const { t } = useTranslation();
   const cat = project.category || 'Web Development';
   const scheme = categoryColors[cat] || { bg: SKY_BLUE, text: WHITE };
   const featured = index === 0;
@@ -455,9 +462,9 @@ const ProjectCardComponent = ({ project, index }: ProjectCardProps) => {
               <Box component="span" sx={{ opacity: 0.8 }}>
                 const project = &#123;
                 <br />
-                &nbsp;&nbsp;role: &apos;{project.role}&apos;,
+                &nbsp;&nbsp;{t('projects.codeWindow.roleKey')}: &apos;{project.role}&apos;,
                 <br />
-                &nbsp;&nbsp;impact: &apos;design + code&apos;
+                &nbsp;&nbsp;{t('projects.codeWindow.impactKey')}: &apos;{t('projects.codeWindow.impactValue')}&apos;
                 <br />
                 &#125;
               </Box>
@@ -492,23 +499,39 @@ const ProjectCardComponent = ({ project, index }: ProjectCardProps) => {
 };
 
 export const ProjectsSection = () => {
+  const { t } = useTranslation();
+  const localizedProjects = t('projects.items', {
+    returnObjects: true
+  }) as Array<Pick<ProjectItem, 'id' | 'title' | 'description' | 'role' | 'technologies' | 'category'>>;
+
+  const mergedProjects = projects.map((project) => {
+    const localized = localizedProjects.find((item) => item.id === project.id);
+    return localized
+      ? {
+          ...project,
+          title: localized.title,
+          description: localized.description,
+          role: localized.role,
+          technologies: localized.technologies,
+          category: localized.category
+        }
+      : project;
+  });
+
   return (
     <ProjectsContainer as="section" id="projects">
       <ProjectsContent maxWidth="xl">
         <EditorialHeader>
           <Box>
-            <HeaderLabel>§ 03 — Selected Work</HeaderLabel>
-            <HeaderTitle>Projects</HeaderTitle>
+            <HeaderLabel>{t('projects.headerLabel')}</HeaderLabel>
+            <HeaderTitle>{t('projects.headerTitle')}</HeaderTitle>
           </Box>
 
-          <HeaderNote>
-            Digital products, interfaces and systems built through strategy,
-            code and art direction.
-          </HeaderNote>
+          <HeaderNote>{t('projects.headerNote')}</HeaderNote>
         </EditorialHeader>
 
         <Grid container spacing={{ xs: 3, md: 4 }}>
-          {projects.map((project, index) => (
+          {mergedProjects.map((project, index) => (
             <ProjectCardComponent
               key={project.id}
               project={project}

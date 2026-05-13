@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import {
   BLACK,
   CREAM,
@@ -498,23 +499,23 @@ const SkillTag = styled(Box)({
 });
 
 export const AboutSection = () => {
+  const { t } = useTranslation();
+  const aboutSkills = t('about.skills', { returnObjects: true }) as string[];
+
   return (
     <AboutContainer as="section" id="about">
-      <BackgroundWord>About</BackgroundWord>
+      <BackgroundWord>{t('about.backgroundWord')}</BackgroundWord>
       <BlueprintLines />
       <DotField />
 
       <AboutContent maxWidth="xl">
         <EditorialHeader>
           <Box>
-            <HeaderLabel>§ 01 — Profile</HeaderLabel>
-            <HeaderTitle>About me</HeaderTitle>
+            <HeaderLabel>{t('about.headerLabel')}</HeaderLabel>
+            <HeaderTitle>{t('about.headerTitle')}</HeaderTitle>
           </Box>
 
-          <HeaderNote>
-            A hybrid profile across engineering, visual systems, art direction
-            and digital strategy.
-          </HeaderNote>
+          <HeaderNote>{t('about.headerNote')}</HeaderNote>
         </EditorialHeader>
 
         <Grid container spacing={{ xs: 6, md: 7 }} alignItems="center">
@@ -532,7 +533,7 @@ export const AboutSection = () => {
                   <ImagePlaceholder>
                     <ProfilePhoto
                       src={valeriaImage}
-                      alt="Valeria Behrend — Senior Software Developer & Art Director"
+                      alt="Valeria Behrend"
                     />
                     <PhotoTint />
                     <PhotoGrid />
@@ -540,30 +541,30 @@ export const AboutSection = () => {
                   </ImagePlaceholder>
 
                   <ImageBadge>
-                    <BadgeText>Senior Web Developer</BadgeText>
-                    <BadgeText>& Art Director</BadgeText>
+                    <BadgeText>{t('about.badgeLine1')}</BadgeText>
+                    <BadgeText>{t('about.badgeLine2')}</BadgeText>
                   </ImageBadge>
                 </ImageFrame>
 
                 <StatsStrip>
                   <StatBlock>
                     <StatNumber>5+</StatNumber>
-                    <StatLabel>Years Exp.</StatLabel>
+                    <StatLabel>{t('about.stats.yearsExp')}</StatLabel>
                   </StatBlock>
 
                   <StatBlock bgColor="rgba(91,96,172,0.32)">
                     <StatNumber>DE</StatNumber>
-                    <StatLabel>Germany</StatLabel>
+                    <StatLabel>{t('about.stats.germany')}</StatLabel>
                   </StatBlock>
 
                   <StatBlock bgColor="rgba(214,166,219,0.26)">
                     <StatNumber>AR</StatNumber>
-                    <StatLabel>Argentina</StatLabel>
+                    <StatLabel>{t('about.stats.argentina')}</StatLabel>
                   </StatBlock>
 
                   <StatBlock>
                     <StatNumber>Full</StatNumber>
-                    <StatLabel>Stack</StatLabel>
+                    <StatLabel>{t('about.stats.stack')}</StatLabel>
                   </StatBlock>
                 </StatsStrip>
               </ImageColumn>
@@ -583,64 +584,28 @@ export const AboutSection = () => {
             >
               <TextPanel>
                 <TextContent>
-                  <LocationTag>Buenos Aires × Berlin</LocationTag>
+                  <LocationTag>{t('about.locationTag')}</LocationTag>
 
-                  <IntroLine>
-                    I design and build digital products with a strong visual
-                    point of view.
-                  </IntroLine>
+                  <IntroLine>{t('about.introLine')}</IntroLine>
 
-                  <Paragraph>
-                    I'm Valeria Behrend, a Senior Software Developer with a
-                    background in Advertising Art Direction and experience in
-                    digital marketing. My work lives at the intersection of
-                    technology, visual communication, and strategy.
-                  </Paragraph>
+                  <Paragraph>{t('about.paragraph1')}</Paragraph>
 
-                  <Paragraph>
-                    Before moving fully into software development, I studied
-                    Advertising Art Direction in Argentina, where I built a
-                    strong foundation in concept, composition, branding,
-                    audience perception, and visual storytelling. Later, I
-                    trained in web development through programs at UTN in
-                    Argentina and Le Wagon in Germany.
-                  </Paragraph>
+                  <Paragraph>{t('about.paragraph2')}</Paragraph>
 
                   <PullQuote>
-                    <QuoteText>
-                      There is a real difference between a developer who learned
-                      design later and someone trained to think visually before
-                      moving into code.
-                    </QuoteText>
+                    <QuoteText>{t('about.quote')}</QuoteText>
                   </PullQuote>
 
-                  <Paragraph>
-                    I spent five years in Germany working as a Front-End
-                    Developer and Design Lead, combining hands-on engineering
-                    with design direction, UI decisions, product thinking, and
-                    collaboration across multidisciplinary teams.
-                  </Paragraph>
+                  <Paragraph>{t('about.paragraph3')}</Paragraph>
 
-                  <Paragraph>
-                    I also integrate AI into delivery workflows to optimize
-                    research, prototyping, and production tasks. I work with
-                    prompt engineering practices and context design to improve
-                    output quality, reduce iteration time, and keep a healthy
-                    latency-cost balance across LLM-driven features.
-                  </Paragraph>
+                  <Paragraph>{t('about.paragraph4')}</Paragraph>
 
-                  <Paragraph sx={{ color: CREAM }}>
-                    Today, I build digital products that are technically solid,
-                    visually intentional, and strategically aligned with
-                    business goals.
-                  </Paragraph>
+                  <Paragraph sx={{ color: CREAM }}>{t('about.paragraph5')}</Paragraph>
 
                   <SkillTags>
-                    <SkillTag>UI/UX</SkillTag>
-                    <SkillTag>Engineering</SkillTag>
-                    <SkillTag>Art Direction</SkillTag>
-                    <SkillTag>Marketing</SkillTag>
-                    <SkillTag>AI</SkillTag>
+                    {aboutSkills.map((skill) => (
+                      <SkillTag key={skill}>{skill}</SkillTag>
+                    ))}
                   </SkillTags>
                 </TextContent>
               </TextPanel>

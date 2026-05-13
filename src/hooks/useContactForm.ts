@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
 import { ContactFormState } from '../types';
 
 const initialFormState: ContactFormState = {
@@ -10,6 +11,7 @@ const initialFormState: ContactFormState = {
 };
 
 export const useContactForm = () => {
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState<ContactFormState>(initialFormState);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +39,7 @@ export const useContactForm = () => {
     e.preventDefault();
 
     if (!serviceId || !templateId || !publicKey) {
-      setErrorMessage('Faltan variables de EmailJS. Configura .env.local para enviar mensajes.');
+      setErrorMessage(t('contact.errors.missingEmailConfig'));
       return;
     }
 
@@ -60,7 +62,7 @@ export const useContactForm = () => {
       project_type: formData.projectType,
       message: formData.message,
       formatted_message: formattedMessage,
-      sent_at: new Date().toLocaleString('es-AR')
+      sent_at: new Date().toLocaleString(i18n.language.startsWith('es') ? 'es-AR' : 'en-US')
     };
 
     try {
@@ -69,7 +71,7 @@ export const useContactForm = () => {
       setFormData(initialFormState);
       setTimeout(() => setIsSubmitted(false), 4000);
     } catch {
-      setErrorMessage('No se pudo enviar el mensaje. Intenta nuevamente en unos minutos.');
+      setErrorMessage(t('contact.errors.sendFailed'));
     } finally {
       setIsSubmitting(false);
     }
