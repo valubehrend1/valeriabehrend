@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import { motion } from 'motion/react';
 import { Box, Container, IconButton, Drawer } from '@mui/material';
-import { Close, Menu } from '@mui/icons-material';
-import { ReactNode, useState } from 'react';
+import { Close, KeyboardArrowUp, Menu } from '@mui/icons-material';
+import { ReactNode, useEffect, useState } from 'react';
 import { BLACK, PINK, YELLOW, SKY_BLUE, PURPLE } from '../../styles/theme';
 
 const PageContainer = styled(Box)({
@@ -21,7 +21,7 @@ const Nav = styled(Box)({
   backgroundColor: BLACK,
   borderBottom: `1px solid ${PINK}`,
   transition: 'background-color 0.3s ease, border-color 0.3s ease',
-  height: '56px',
+  height: '64px',
   display: 'flex',
   alignItems: 'center'
 });
@@ -34,7 +34,7 @@ const NavInner = styled(Container)({
 
 const NavLogo = styled(Box)({
   fontFamily: '"Space Mono", monospace',
-  fontSize: '1.4rem',
+  fontSize: '1.9rem',
   color: '#FAFAFA',
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
@@ -60,7 +60,7 @@ const NavLinks = styled(Box)(({ theme }) => ({
 
 const NavLink = styled('a')({
   fontFamily: '"Space Mono", monospace',
-  fontSize: '0.65rem',
+  fontSize: '0.92rem',
   fontWeight: 700,
   letterSpacing: '0.15em',
   textTransform: 'uppercase',
@@ -72,14 +72,14 @@ const NavLink = styled('a')({
 
 const NavContactLink = styled('a')({
   fontFamily: '"Space Mono", monospace',
-  fontSize: '0.65rem',
+  fontSize: '0.92rem',
   fontWeight: 700,
   letterSpacing: '0.15em',
   textTransform: 'uppercase',
   color: '#fff',
   textDecoration: 'none',
   backgroundColor: PINK,
-  padding: '6px 16px',
+  padding: '8px 18px',
   border: `1px solid ${BLACK}`,
   borderRadius: '8px',
   transition: 'background-color 0.2s ease',
@@ -205,12 +205,51 @@ const MobileDecorCircle = styled(Box)({
   pointerEvents: 'none'
 });
 
+const BackToTopBtn = styled(IconButton, {
+  shouldForwardProp: (prop) => prop !== '$visible'
+})<{ $visible: boolean }>(({ $visible, theme }) => ({
+  position: 'fixed',
+  right: theme.spacing(2.2),
+  bottom: theme.spacing(5),
+  zIndex: 120,
+  width: 42,
+  height: 58,
+  borderRadius: 0,
+  border: `1px solid ${PINK}`,
+  backgroundColor: 'rgba(17, 17, 17, 0.86)',
+  color: '#FAFAFA',
+  opacity: $visible ? 1 : 0,
+  transform: $visible ? 'translateX(0)' : 'translateX(14px)',
+  pointerEvents: $visible ? 'auto' : 'none',
+  transition: 'opacity 0.24s ease, transform 0.24s ease, background-color 0.2s ease',
+
+  '&:hover': {
+    backgroundColor: PINK,
+    color: BLACK
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    right: theme.spacing(1.2),
+    bottom: theme.spacing(3.2),
+    width: 38,
+    height: 52
+  }
+}));
+
 interface PageShellProps {
   children: ReactNode;
 }
 
 export const PageShell = ({ children }: PageShellProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > 260);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
@@ -315,6 +354,14 @@ export const PageShell = ({ children }: PageShellProps) => {
           <MobileDecorCircle />
         </MobileMenuDrawer>
       </Drawer>
+
+      <BackToTopBtn
+        $visible={showBackToTop}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <KeyboardArrowUp fontSize="small" />
+      </BackToTopBtn>
 
       {children}
     </PageContainer>
