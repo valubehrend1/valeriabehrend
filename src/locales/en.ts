@@ -85,6 +85,13 @@ const en = {
         technologies: ['AI APIs', 'Python', 'Automation', 'n8n']
       },
       {
+        id: 6,
+        title: 'Strategy, Design & Social Media',
+        description:
+          'I help brands build a clear, consistent, and engaging digital presence through marketing strategy, graphic and audiovisual design, and community management. From planning content and creating visual assets to developing videos and managing social media channels, I create solutions that connect with the right audience and strengthen brand identity.',
+        technologies: ['Marketing Strategy', 'Graphic & Audiovisual Design', 'Community Management']
+      },
+      {
         id: 3,
         title: 'UI/UX with Design & Marketing Criteria',
         description:

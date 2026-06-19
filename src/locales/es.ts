@@ -85,6 +85,13 @@ const es = {
         technologies: ['APIs de IA', 'Python', 'Automatización', 'n8n']
       },
       {
+        id: 6,
+        title: 'Marketing, diseño & Social Media',
+        description:
+          'Ayudo a marcas a construir una presencia digital clara, coherente y atractiva a través de estrategias de marketing, diseño gráfico y audiovisual, y community management. Desde la planificación de contenidos y la creación de piezas visuales hasta el desarrollo de videos y la gestión de redes sociales, diseño soluciones que conectan con la audiencia indicada y fortalecen la identidad de marca.',
+        technologies: ['Estrategia de Marketing', 'Diseño Gráfico y Audiovisual', 'Community Management']
+      },
+      {
         id: 3,
         title: 'UI/UX con Criterio de Diseño y Marketing',
         description:
@@ -93,7 +100,7 @@ const es = {
       },
       {
         id: 4,
-        title: 'Mantenimiento y Evolución de Producto',
+        title: 'Mantenimiento y Evolución del Producto',
         description:
           'Mejora continua, refactors, nuevas funcionalidades y optimización de performance para productos existentes. Un partnership técnico de largo plazo, no solo ejecución puntual.',
         technologies: ['Optimization', 'Refactoring', 'Testing', 'CI/CD']
