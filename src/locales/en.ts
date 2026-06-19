@@ -24,11 +24,11 @@ const en = {
       'React',
       'TypeScript',
       'Capacitor',
-      'Docker',
       'REST APIs',
       'AI Integration',
       'Brand Strategy',
-      'Automation'
+      'Design',
+      'Social Media'
     ]
   },
   about: {

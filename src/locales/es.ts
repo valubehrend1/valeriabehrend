@@ -24,11 +24,11 @@ const es = {
       'React',
       'TypeScript',
       'Capacitor',
-      'Docker',
       'APIs REST',
       'Integración de IA',
       'Estrategia de Marca',
-      'Automatización'
+      'Diseño',
+      'Social Media'
     ]
   },
   about: {
